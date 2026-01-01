@@ -76,11 +76,11 @@ X      \  /                       \
 
 一鍵部署到 Zeabur，24/7 自動運行：
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/harmonic-scanner)
+[![Deployed on Zeabur](https://zeabur.com/deployed-on-zeabur-dark.svg)](https://zeabur.com/referral?referralCode=louis12&utm_source=thankcoom)
 
 **Zeabur 手動部署步驟：**
 
-1. 前往 [Zeabur](https://zeabur.com) 註冊/登入
+1. 前往 [Zeabur](https://zeabur.com/referral?referralCode=louis12) 註冊/登入
 2. 創建新專案 → 選擇「從 GitHub 導入」
 3. 選擇此 Repository
 4. 在環境變數中設定：
