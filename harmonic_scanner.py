@@ -9,12 +9,10 @@ Louis 諧波形態掃描器
 - 8 種諧波形態掃描（蝙蝠、螃蟹、加特里、蝴蝶的看漲/看跌）
 - Discord Embed 卡片式通知
 - 支援手動執行與定時自動執行
-- 支援雲端部署（Zeabur, Railway, Render 等）
 
 作者：Louis_LAB / Instagram: @mr.__.l
 """
 
-import os
 import numpy as np
 import pandas as pd
 import ccxt
@@ -26,31 +24,28 @@ from datetime import datetime, timezone
 from scipy.signal import argrelextrema
 
 # ============================================================================
-# 配置區 - 支援環境變數（雲端部署）或直接設定
+# 配置區 - 請在此處設定你的參數
 # ============================================================================
 
-# Discord Webhook URL（優先使用環境變數，方便雲端部署）
-DISCORD_WEBHOOK_URL = os.environ.get(
-    "DISCORD_WEBHOOK_URL",
-    "你的_DISCORD_WEBHOOK_URL"  # 本地開發時可在此處填入
-)
+# Discord Webhook URL（請替換成你自己的 Webhook URL）
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1456273057818611847/SQ6HkHSuyJ4imfdgGPObIQ8M3r0-K0ihqK8lVXAr7d0iF5qSjdfR9yeYEm0DVLSPxsgk"
 
-# 掃描設定（支援環境變數覆蓋）
+# 掃描設定
 CONFIG = {
     # 谐波形態掃描時間框架（支援：1h, 4h, 1d 等）
-    "harmonic_timeframe": os.environ.get("HARMONIC_TIMEFRAME", "1h"),
+    "harmonic_timeframe": "1h",
 
     # K線數據數量
-    "limit": int(os.environ.get("KLINE_LIMIT", "500")),
+    "limit": 500,
 
     # 峰值檢測靈敏度（數值越大越不敏感）
-    "peak_order": int(os.environ.get("PEAK_ORDER", "10")),
+    "peak_order": 10,
 
     # 定時執行間隔（分鐘）
-    "schedule_interval_minutes": int(os.environ.get("SCHEDULE_INTERVAL", "240")),
+    "schedule_interval_minutes": 240,  # 預設每 4 小時
 
     # 是否啟用詳細日誌
-    "verbose": os.environ.get("VERBOSE", "true").lower() == "true",
+    "verbose": True,
 }
 
 # 形態顏色配置（Discord Embed 顏色）
@@ -973,14 +968,6 @@ def test_discord():
 def main():
     """主程式入口"""
     import sys
-
-    # 檢查是否為雲端部署模式（透過環境變數）
-    cloud_mode = os.environ.get("CLOUD_MODE", "").lower() == "true"
-
-    if cloud_mode:
-        logger.info("偵測到雲端部署模式，啟動自動排程...")
-        start_scheduler()
-        return
 
     if len(sys.argv) < 2:
         # 預設執行掃描
