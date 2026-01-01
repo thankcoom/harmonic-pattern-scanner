@@ -1,4 +1,5 @@
 {
-  "build_command": "pip install -r requirements.txt",
-  "start_command": "python harmonic_scanner.py"
+  "python": {
+    "entry": "harmonic_scanner.py"
+  }
 }
